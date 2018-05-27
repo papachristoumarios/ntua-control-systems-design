@@ -2,7 +2,9 @@ G = zpk([], [0 -3008 -400.26], 2.718e9);
 kp = 0.37;
 kd = 0.0008;
 C = pid(kp, 0, kd);
-stepinfo(feedback(G*C, 1))
+GCL = feedback(G*C, 1);
+stepinfo(GCL)
+step(GCL / s);
 Kv = 2.718e9 * kp / (400.26 * 3008)
 ess = 1 / Kv
 

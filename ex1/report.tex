@@ -28,7 +28,7 @@
 
 \title{\textbf{Σχεδίαση Συστημάτων Αυτομάτου Ελέγχου} \\ 1η Άσκηση \\ \large{Σχεδίαση Ελεγκτών PID στο MATLAB / Simulink} \\ \small 6o Εξάμηνο - Ακ. Έτος 2017-18 - Ροή Σ}
 \author{Μάριος Παπαχρήστου (03115101 - \texttt{papachristoumarios@gmail.com}) }
-\date{}
+\date{\hrule}
 
 \begin{document}
 
@@ -46,7 +46,7 @@ $$\frac {Y(s)} {R(s)} = \frac {G(s)} {1 + G(s)} = \frac {4500 K k_p +  4500 K k_
 Χωρίς τον ελεγκτή ο ΓΤΡ του ΣΚΒ του $G_p(s)$ είναι 
 
 \includegraphics[width=\textwidth]{plant_rlocus.png}
-
+\includegraphics[width=\textwidth]{step1.png}
 
 
 \subsection*{Περιορισμοί Σχεδίασης \& Σχεδίαση PD Controller} 
@@ -91,38 +91,39 @@ params =
 \subsection*{Σχεδιασμός Ελεγκτή PI}
 Χρησιμοποιώντας τον PID Tuner λαμβάνουμε τα εξής:
 
-Για $k_p = 13, k_i = 31.5$ έχουμε 
+Για $k_p = 11.7, k_i = 0.55$ έχουμε 
 
 \begin{verbatim}
 >> ex2
 
 ans = 
 
-        RiseTime: 0.0092
-    SettlingTime: 0.0296
-     SettlingMin: 0.9110
-     SettlingMax: 1.0445
-       Overshoot: 4.4491
+        RiseTime: 0.0105
+    SettlingTime: 0.0159
+     SettlingMin: 0.9083
+     SettlingMax: 1.0185
+       Overshoot: 1.8482
       Undershoot: 0
-            Peak: 1.0445
-        PeakTime: 0.0198
+            Peak: 1.0185
+        PeakTime: 0.0222
 
 
 ess =
 
-    0.0025
+    0.1459
 
 
 Kv =
 
-  392.4419
+    6.8522
 \end{verbatim}  
 
 η οποία πληροί τις σχεδιαστικές προδιαγραφές για τα $M_p, T_s, T_r, e_{ss}$. Ο γτρ του συνολικού συστήματος είναι πλέον ο ακόλουθος:
 
  \includegraphics[width=\textwidth]{pi_rlocus.png}
+ \includegraphics[width=\textwidth]{step2.png}
 
-Επομένως $$G_c(s) = 13 + \frac {31.5} s$$
+Επομένως $$G_c(s) = 11.7 + \frac {0.55} s$$
 
 και η συνολική ΣΜΑΒ
 
@@ -143,6 +144,7 @@ $$G(s) = G_c(s) G_p(s) = \frac {4500(13 + 31.5 / s)}  {s (s + 361.2)}$$
 Σχηματικά ο γτρ χωρίς τον ελεγκτή απεικονίζεται ως
 
 \includegraphics[width=\textwidth]{plant3_rlocus.png}
+\includegraphics[width=\textwidth]{step3.png}
 
 
 Το σύστημα είναι τύπου 1 και δεν χρειάζεται να αυξήσουμε τον τύπο του με ολοκληρωτή.  μπορούμε να θέσουμε $k_i = 0$ επομένως ανάγουμε την κατάσταση σε PD έλεγχο (Dorf) με $G_c(s) = k_p + k_d s = k_d (s + k_p / k_d) = k_d (s + z)$. Θέλουμε να πετύχουμε $M_p \le 5 \%, \; T_r \le 0.005 \; \mathrm{sec}, \; T_s \le 0.005 \; \mathrm {sec}$.
