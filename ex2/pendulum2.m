@@ -1,7 +1,8 @@
+% Redesign
 clear
 close all
-a = 20.6;
-b = -0.5;
+a = 20.9;
+b = -0.8;
 % system dynamics
 A = [0 1 0 0; a 0 0 0; 0 0 0 1; b 0 0 0];
 B = [0; -1; 0; 0.5];
@@ -113,8 +114,6 @@ figure;
 plot(t, power);
 title('Power');
 xlabel('Time (sec)');
-
-
 
 % D Luenberger observer
 
